@@ -19,11 +19,13 @@ for line in reader:
     if len(line) > 0:
         author_id = line[0]
         if line[1][0] == 'A':
+            # remove 'A' from the field
             reputation = line[1][2:-1]
             gold = line[2]
             silver = line[3]
             bronze = line[4]
         elif line[1][0] == 'B':
+            # remove 'B' from the field
             line[1] = line[1][2:-1]
             line.append(reputation)
             line.append(gold)
