@@ -16,10 +16,11 @@ hours = []
 hours_counter = {}
 
 for line in reader:
+    # Process only the valid lines.
     if len(line) > 0:
         author_id, hour = line
-        this_key = author_id
 
+        this_key = author_id
         if old_key and old_key != this_key:
             for hour in hours:
                 if hour in hours_counter:
@@ -27,6 +28,7 @@ for line in reader:
                 else:
                     hours_counter[hour] = 1
 
+            # Sort the popular hours in descending order.
             popular_hours = sorted(
                 hours_counter,
                 key=hours_counter.get,
@@ -49,6 +51,7 @@ if old_key != None:
         else:
             hours_counter[hour] = 1
 
+    # Sort the popular hours in descending order.
     popular_hours = sorted(
         hours_counter,
         key=hours_counter.get,
