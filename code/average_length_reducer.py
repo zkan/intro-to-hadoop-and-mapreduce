@@ -12,51 +12,41 @@ writer = csv.writer(
 )
 
 old_key = None
-hours = []
-hours_counter = {}
+old_post_length = 0
+total_answer_length = 0
+answer_count = 0
 
 for line in reader:
     # Process only the valid lines.
     if len(line) > 0:
-        author_id, hour = line
+        node_id = line[0]
+        this_key = node_id
 
-        this_key = author_id
+        if line[1][0] == 'A':
+            # remove 'A' from the field
+            post_length = line[1][2:-1]
+        elif line[1][0] == 'B':
+            # remove 'B' from the field
+            answer_length = line[1][2:-1]
+            total_answer_length += float(answer_length)
+            answer_count += 1
+
         if old_key and old_key != this_key:
-            for hour in hours:
-                if hour in hours_counter:
-                    hours_counter[hour] += 1
-                else:
-                    hours_counter[hour] = 1
+            if answer_count != 0:
+                average_answer_length = total_answer_length / answer_count
+            else:
+                average_answer_length = 0.0
 
-            # Sort the popular hours in descending order.
-            popular_hours = sorted(
-                hours_counter,
-                key=hours_counter.get,
-                reverse=True
-            )
-
-            results = [author_id, popular_hours[0]]
+            results = [old_key, old_post_length, average_answer_length]
             writer.writerow(results)
 
-            hours = []
-            hours_counter = {}
+            total_answer_length = 0
+            answer_count = 0
 
         old_key = this_key
-        hours.append(hour)
+        old_post_length = post_length
 
 if old_key != None:
-    for hour in hours:
-        if hour in hours_counter:
-            hours_counter[hour] += 1
-        else:
-            hours_counter[hour] = 1
-
-    # Sort the popular hours in descending order.
-    popular_hours = sorted(
-        hours_counter,
-        key=hours_counter.get,
-        reverse=True
-    )
-
-    results = [author_id, popular_hours[0]]
+    average_answer_length = total_answer_length / answer_count
+    results = [old_key, old_post_length, average_answer_length]
     writer.writerow(results)
