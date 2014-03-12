@@ -24,8 +24,8 @@ for line in reader:
                 node_id = line[0]
                 post_length = len(line[4])
 
-                record = [post_length]
                 sys.stdout.write(node_id + '\tA')
+                record = [post_length]
             elif node_type == 'answer':
                 abs_parent_id = line[7]
                 answer_length = len(line[4])
