@@ -18,11 +18,19 @@ for line in reader:
         if line[0] == 'id':
             continue
 
-        author_id = line[3]
-        # The added_at field is stored in the format
-        # like this 2012-02-25 08:09:06.787181+00.
-        added_at = line[8].split(' ')
+        node_type = line[5]
+        if node_type in ['question', 'answer']:
+            if node_type == 'question':
+                node_id = line[0]
+                post_length = len(line[4])
 
-        # Use author ID as key and the hour as value.
-        record = [author_id, added_at[1][0:2]]
-        writer.writerow(record)
+                record = [post_length]
+                sys.stdout.write(node_id + '\tA')
+            elif node_type == 'answer':
+                abs_parent_id = line[7]
+                answer_length = len(line[4])
+
+                sys.stdout.write(abs_parent_id + '\tB')
+                record = [answer_length]
+
+            writer.writerow(record)
