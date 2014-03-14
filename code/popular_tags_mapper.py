@@ -11,6 +11,9 @@ writer = csv.writer(
     quoting=csv.QUOTE_ALL
 )
 
+top_n = 10
+tagname_dict = {}
+
 for line in reader:
     # Process only the valid lines.
     if len(line) == 19:
@@ -18,11 +21,19 @@ for line in reader:
         if line[0] == 'id':
             continue
 
-        author_id = line[3]
-        # The added_at field is stored in the format
-        # like this 2012-02-25 08:09:06.787181+00.
-        added_at = line[8].split(' ')
+        tagnames = line[2]
+        node_type = line[5]
+        if node_type == 'question':
+            for tagname in tagnames.split(' '):
+                if len(tagname) > 0:
+                    if tagname in tagname_dict:
+                        tagname_dict[tagname] += 1
+                    else:
+                        tagname_dict[tagname] = 0
 
-        # Use author ID as key and the hour as value.
-        record = [author_id, added_at[1][0:2]]
-        writer.writerow(record)
+sorted_tagnames = sorted(tagname_dict.items(), key=lambda x: x[1])
+sorted_tagnames.reverse()
+
+for rank in range(top_n):
+    record = [sorted_tagnames[rank][0], sorted_tagnames[rank][1]]
+    writer.writerow(record)
