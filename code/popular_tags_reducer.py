@@ -11,52 +11,29 @@ writer = csv.writer(
     quoting=csv.QUOTE_ALL
 )
 
+top_n = 10
 old_key = None
-hours = []
-hours_counter = {}
+max_num_of_questions = -1
+tagname_dict = {}
 
 for line in reader:
     # Process only the valid lines.
     if len(line) > 0:
-        author_id, hour = line
+        tagname, num_of_questions = line
+        num_of_questions = int(num_of_questions)
 
-        this_key = author_id
+        this_key = tagname
         if old_key and old_key != this_key:
-            for hour in hours:
-                if hour in hours_counter:
-                    hours_counter[hour] += 1
-                else:
-                    hours_counter[hour] = 1
-
-            # Sort the popular hours in descending order.
-            popular_hours = sorted(
-                hours_counter,
-                key=hours_counter.get,
-                reverse=True
-            )
-
-            results = [author_id, popular_hours[0]]
-            writer.writerow(results)
-
-            hours = []
-            hours_counter = {}
+            max_num_of_questions = -1
 
         old_key = this_key
-        hours.append(hour)
+        if num_of_questions > max_num_of_questions:
+            tagname_dict[this_key] = num_of_questions
+            max_num_of_questions = num_of_questions
 
-if old_key != None:
-    for hour in hours:
-        if hour in hours_counter:
-            hours_counter[hour] += 1
-        else:
-            hours_counter[hour] = 1
+sorted_tagnames = sorted(tagname_dict.items(), key=lambda x: x[1])
+sorted_tagnames.reverse()
 
-    # Sort the popular hours in descending order.
-    popular_hours = sorted(
-        hours_counter,
-        key=hours_counter.get,
-        reverse=True
-    )
-
-    results = [author_id, popular_hours[0]]
-    writer.writerow(results)
+for rank in range(top_n):
+    record = [sorted_tagnames[rank][0], sorted_tagnames[rank][1]]
+    writer.writerow(record)
