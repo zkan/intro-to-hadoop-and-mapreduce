@@ -22,6 +22,7 @@ for line in reader:
 
         if old_key and old_key != this_key:
             results = author_list
+            # Prepend the node id to the list.
             results[:0] = [old_key]
             writer.writerow(results)
 

@@ -31,6 +31,7 @@ for line in reader:
             tagname_dict[this_key] = num_of_questions
             max_num_of_questions = num_of_questions
 
+# Sort by value.
 sorted_tagnames = sorted(tagname_dict.items(), key=lambda x: x[1])
 sorted_tagnames.reverse()
 

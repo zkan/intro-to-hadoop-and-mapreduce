@@ -24,12 +24,14 @@ for line in reader:
                 node_id = line[0]
                 post_length = len(line[4])
 
+                # Put 'A' to mark it as question.
                 sys.stdout.write(node_id + '\tA')
                 record = [post_length]
             elif node_type == 'answer':
                 abs_parent_id = line[7]
                 answer_length = len(line[4])
 
+                # Put 'B' to mark it as answer.
                 sys.stdout.write(abs_parent_id + '\tB')
                 record = [answer_length]
 

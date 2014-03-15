@@ -31,6 +31,7 @@ for line in reader:
                     else:
                         tagname_dict[tagname] = 0
 
+# Sort by value.
 sorted_tagnames = sorted(tagname_dict.items(), key=lambda x: x[1])
 sorted_tagnames.reverse()
 
