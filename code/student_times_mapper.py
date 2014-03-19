@@ -1,14 +1,15 @@
 #!/usr/bin/python
 
 '''
-Find for each student what is the hour during which the student has posted
-the most posts.
-
 -- Input
-Udacity forum data that contain all forum questions and answers in one table (forum_node.tsv)
+Udacity forum data that contain all forum questions and answers in one table
+(forum_node.tsv)
+
 -- Output
 Key: author ID
 Value: hour during which the student has posted
+
+This mapper reads the data and then output in the desired format.
 '''
 
 import csv

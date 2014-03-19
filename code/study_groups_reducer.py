@@ -1,5 +1,15 @@
 #!/usr/bin/python
 
+'''
+-- Input
+Node ID and author ID
+
+-- Output
+Node ID and the list of students that have posted in the node
+
+The reducer gathers the author ID for each node then output them all.
+'''
+
 import csv
 import sys
 

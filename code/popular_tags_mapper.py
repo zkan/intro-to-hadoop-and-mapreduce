@@ -1,5 +1,19 @@
 #!/usr/bin/python
 
+'''
+-- Input
+Udacity forum data that contain all forum questions and answers in one table
+(forum_node.tsv)
+
+-- Output
+Key: tag name for question node
+Value: number of questions that have tag name
+
+This mapper reads the data, counts the number of tags for each question, then
+outputs only the top 10 tags that are most used in the forum (only question
+type).
+'''
+
 import csv
 import sys
 

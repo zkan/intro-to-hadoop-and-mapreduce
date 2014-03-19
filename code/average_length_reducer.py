@@ -1,5 +1,17 @@
 #!/usr/bin/python
 
+'''
+-- Input
+Node ID and length with tag 'A' for question and tag 'B' for answer
+
+-- Output
+Node ID, post length, and average answer length
+
+This reducer takes the input then checks if it is question or answer. If it is
+question, it keeps the post length. If it is answer, it computes the average
+answer length.
+'''
+
 import csv
 import sys
 

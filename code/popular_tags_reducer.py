@@ -1,5 +1,16 @@
 #!/usr/bin/python
 
+'''
+-- Input
+Tag and number of questions that have that tag
+
+-- Output
+Top 10 tags, ordered by the number of questions they appear in
+
+This reducer takes the tags that are already ranked from the mapper(s), gathers
+all of them and rank them again. Finally, it outputs only top 10 tags.
+'''
+
 import csv
 import sys
 

@@ -1,5 +1,19 @@
 #!/usr/bin/python
 
+'''
+-- Input
+Udacity forum data that contain all forum questions and answers in one table
+(forum_node.tsv)
+
+-- Output
+Key: node ID
+Value: author ID
+
+This mapper reads the data, checks if it is question, answer, or commnet. If it
+is question, then just outputs node ID and author ID. If it is answer/comment,
+the outputs the parent ID of the answer/comment and authod ID.
+'''
+
 import csv
 import sys
 
@@ -24,7 +38,7 @@ for line in reader:
         abs_parent_id = line[7]
         if node_type == 'question':
             record = [node_id, author_id]
-        elif node_type == 'answer':
+        else:
             record = [abs_parent_id, author_id]
 
         writer.writerow(record)

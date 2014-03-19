@@ -2,9 +2,15 @@
 
 '''
 -- Input
-"author_id"\t"hour"
+Author ID and hour
+
 -- Output
-"author_id"\t"hour during which the student has posted the most posts"
+Author ID and the hour during which the student has posted the most posts
+
+This reducer takes the author ID and hour as input. For each author, it counts
+the number of hours during the post, sorts it in descending order, then output
+the hour ties for the most posts. If there are two or more hours that tie for
+the most posts, output all of them.
 '''
 
 import csv

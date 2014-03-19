@@ -1,5 +1,19 @@
 #!/usr/bin/python
 
+'''
+-- Input
+Udacity forum data that contain all forum questions and answers in one table
+(forum_node.tsv)
+
+-- Output
+Key: forum node ID
+Value: post length with tag 'A' and answer length with tag 'B'
+
+This mapper reads the data, finds the length of the body of each forum node
+then puts tag 'A' if the node is question and tag 'B' if the node is answer.
+'''
+
+
 import csv
 import sys
 
