@@ -47,6 +47,10 @@ for line in reader:
         old_post_length = post_length
 
 if old_key != None:
-    average_answer_length = total_answer_length / answer_count
+    if answer_count != 0:
+        average_answer_length = total_answer_length / answer_count
+    else:
+        average_answer_length = 0.0
+
     results = [old_key, old_post_length, average_answer_length]
     writer.writerow(results)
