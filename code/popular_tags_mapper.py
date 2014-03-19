@@ -29,7 +29,7 @@ for line in reader:
                     if tagname in tagname_dict:
                         tagname_dict[tagname] += 1
                     else:
-                        tagname_dict[tagname] = 0
+                        tagname_dict[tagname] = 1
 
 # Sort by value.
 sorted_tagnames = sorted(tagname_dict.items(), key=lambda x: x[1])
